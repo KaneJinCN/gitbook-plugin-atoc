@@ -14,8 +14,19 @@ module.exports = {
     hooks: {
         "page:before": function (page) {
             page.content = toc.insert(page.content, {
+                titleize: function (str) {
+                    if (hrefPattern.test(str)) {
+                        return str.replace(hrefPattern, '');
+                    } else {
+                        return str;
+                    }
+                },
                 slugify: function (str) {
-                  return slug(str.replace(/&.*?;/g, ''));
+                    var res = str;
+                    if (hrefPattern.test(str)) {
+                        res = hrefPattern.exec(str)[0];
+                    }
+                    return slug(res.replace(/&.*?;/g, ''));
                 },
                 bullets: '*'
             });
