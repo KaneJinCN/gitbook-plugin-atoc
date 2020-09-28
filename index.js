@@ -1,6 +1,8 @@
 var toc = require('markdown-toc');
 var slug = require('github-slugid');
 
+var hrefPattern = /\{#.*\}/;
+
 module.exports = {
     book: {
       assets: './assets',
